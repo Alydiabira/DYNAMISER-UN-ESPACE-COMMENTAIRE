@@ -44,8 +44,8 @@
 //     list.appendChild(newItemList);
 // }
 
-import { alertElement } from "./function/alert.js"
-import { fetchJSON } from "./function/api.js"
+import { alertElement } from "./functions/alert.js"
+import { fetchJSON } from "./functions/api.js"
 
 
 class InfinitePagination {
@@ -161,14 +161,16 @@ class FetchForm {
         button.setAttribute('disabled', '')
         try {
             const data = new FormData(form)
-            const result = await fetchJSON(this.#endpoint, {
+            const comment = await fetchJSON(this.#endpoint, {
                 method: 'POST',
-                body: JSON.stringify(Object.fromEntries(data)),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                json: Object.fromEntries(data)
             })
-            console.log(result) 
+            const commentElement = this.#template.content.cloneNode(true)
+            for (const [key, selector] of Object.entries(this.this.#elements)) {
+                commentElement.querySelector(selector).innerText = comment[key]
+                console.log({key, selector})
+        }
+        this.#target.append(commentElement)
         } catch (e) {
         }
     }
