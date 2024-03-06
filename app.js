@@ -88,12 +88,12 @@ class InfinitePagination {
         for (const comment of comments) {
             const commentElement = this.#template.content.cloneNode(true)
             for (const [key, selector] of Object.entries(this.this.#elements)) {
-                commentElement.setAttribute(selector).innerText = comment[key]
+                commentElement.querySelector(selector).innerText = comment[key]
                 console.log({key, selector})
-            this.#target.append(commentElement)
         }
-        this.#loading = false
+        this.#target.append(commentElement)
     }
+    this.#loading = false
 }
 }
 
