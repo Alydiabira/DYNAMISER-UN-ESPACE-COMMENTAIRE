@@ -175,9 +175,15 @@ class FetchForm {
         button.removeAttribute('disabled')
 
         } catch (e) {
-            form.insertAdjacentElement('beforebegin', 
-            alertElement('Error serveur')
+            const errorElement =  alertElement('Error serveur')
+            form.insertAdjacentElement(
+                'beforebegin', 
+                errorElement
             )
+            errorElement.addEventListener('close', () => {
+                button.removeAttribute('disabled')
+
+            })
         }
     }
 
