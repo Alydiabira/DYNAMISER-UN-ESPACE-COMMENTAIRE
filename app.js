@@ -173,15 +173,15 @@ class FetchForm {
         this.#target.prepend(commentElement)
         form.rest()
         button.removeAttribute('disabled')
-
+        form.insertAdjacentElement(
+            'beforebegin',
+            alertElement('Error serveur', 'success')
+        )
         } catch (e) {
-            const errorElement =  alertElement('Error serveur')
-            form.insertAdjacentElement(
-                'beforebegin', 
-                errorElement
-            )
             errorElement.addEventListener('close', () => {
                 button.removeAttribute('disabled')
+                errorElement
+
 
             })
         }
