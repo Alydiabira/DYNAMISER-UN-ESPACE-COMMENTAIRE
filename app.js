@@ -131,9 +131,27 @@ class FetchForm {
  * @param {HTMLFormElement} element 
  */
     constructor(form) {
-        form.addEventListener
-
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            this.#submitForm(e.currentTarget)
+        })
     }
+
+        /**
+     * 
+     * @param {HTMLFormElement} form 
+     */
+    #submitForm (form) {
+        const button = form.querySelector('button')
+        button.setAttribute('disabled', '')
+        try {
+            const data = new FormData(form)
+        } catch (e) {
+
+        }
+    }
+
+
 }
 
 document
