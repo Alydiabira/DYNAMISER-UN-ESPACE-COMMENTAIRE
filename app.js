@@ -44,6 +44,9 @@
 //     list.appendChild(newItemList);
 // }
 
+import { alertElement } from "./function/alert.js"
+import { fetchJSON } from "./function/api.js"
+
 
 class InfinitePagination {
 
@@ -108,7 +111,8 @@ class InfinitePagination {
     this.#loading = false
 
     } catch (e) {
-        this.#target.append(alertElemnt('Impossible de charger les contenus')
+        this.#target.append(
+            alertElement('Impossible de charger les contenus')
         )
 
         this.#observer.disconnect()
