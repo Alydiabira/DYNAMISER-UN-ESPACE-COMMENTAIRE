@@ -175,6 +175,9 @@ class FetchForm {
         button.removeAttribute('disabled')
 
         } catch (e) {
+            form.insertAdjacentElement('beforebegin', 
+            alertElement('Error serveur')
+            )
         }
     }
 
