@@ -172,6 +172,8 @@ class FetchForm {
         }
         this.#target.prepend(commentElement)
         form.rest()
+        button.removeAttribute('disabled')
+
         } catch (e) {
         }
     }
