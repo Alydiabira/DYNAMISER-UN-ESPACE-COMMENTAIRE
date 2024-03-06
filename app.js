@@ -139,7 +139,7 @@ class FetchForm {
     
 /**
  * 
- * @param {HTMLFormElement} element 
+ * @param {HTMLFormElement} form 
  */
     constructor(form) {
         this.#endpoint = form.dataset.endpoint
@@ -161,9 +161,10 @@ class FetchForm {
         button.setAttribute('disabled', '')
         try {
             const data = new FormData(form)
-            const result = await fetchJSON(this.#endpoint)
+            const result = await fetchJSON(this.#endpoint, {
                 method: 'POST',
                 body: data
+            } )
             console.log(result) 
         } catch (e) {
 
