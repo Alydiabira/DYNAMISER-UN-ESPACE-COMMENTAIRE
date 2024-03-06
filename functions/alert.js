@@ -1,9 +1,11 @@
 /**
  * Renvoi un élément HTML représentant une alert 
- * @param {*} message 
+ * @param {string} message 
+ * @param {string} type 
+
  * @param {HTMLElement} 
  */
-export function alertElement( message) { 
+export function alertElement( message, type = 'danger' ) { 
     /** @type {HTMLElement} */
     const el = document.querySelector('#alert').content.firstElement.cloneNode(true)
     el.querySelector('.js-text').innerHTML = message
