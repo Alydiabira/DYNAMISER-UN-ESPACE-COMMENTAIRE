@@ -89,8 +89,8 @@ class InfinitePagination {
         if (this.#loading) {
             return
         }
-        try {
         this.#loading = true
+        try {
         const url = new URL(this.#endpoint)
         url.searchParams.set('_page', this.#page)
         const comments = await fetchJSON(url.toString())
@@ -111,16 +111,36 @@ class InfinitePagination {
     this.#loading = false
 
     } catch (e) {
-        this.#target.append(
-            alertElement('Impossible de charger les contenus')
-        )
-
+        this.#loader.style.display = 'none'
+        const error = alertElement('Impossible de charger les contenus')
+        error.addEventListener('close', () => {
+            this.#loader.style.removeProperty('display')
+            this.#loading = false
+        })
+        this.#target.append(error)
         this.#observer.disconnect()
         this.#loader.remove()
     }
-        
     }
 }
+
+
+class FetchForm {
+/**
+ * 
+ * @param {HTMLFormElement} element 
+ */
+    constructor(form) {
+        form.addEventListener
+
+    }
+}
+
 document
 .querySelectorAll('.js-infinite-pagination')
 .forEach(el => InfinitePagination.add(el)) //
+
+
+document
+.querySelectorAll('.js-form-fetch')
+.forEach(form => FetchForm(form)) //
