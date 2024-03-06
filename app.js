@@ -54,6 +54,8 @@ class InfinitePagination {
      /** @type {HTMLElement} */
     #target
      /** @type {object} */
+    #loader
+     /** @type {object} */
     #elements
      /** @type {IntersectionObserver} */
     #observer
@@ -66,6 +68,7 @@ class InfinitePagination {
 * @param {HTMLElement} element
 */
     constructor (element) {
+        this.#loader = element
         this.#endpoint = element.dataset.endpoint
         this.#template = document.querySelector(element.dataset.template)
         this.#target = document.querySelector(element.dataset.target)
@@ -83,8 +86,16 @@ class InfinitePagination {
         if (this.#loading) {
             return
         }
+        try {
         this.#loading = true
-        const comments = await fetchJSON(this.#endpoint)
+        const url = new URL(this.#endpoint)
+        url.searchParams.set('_page', this.#page)
+        const comments = await fetchJSON(url.toString())
+        if (comments.length === 0) {
+            this.#observer.disconnect()
+            this.#loader.remove()
+            return
+        }
         for (const comment of comments) {
             const commentElement = this.#template.content.cloneNode(true)
             for (const [key, selector] of Object.entries(this.this.#elements)) {
@@ -93,10 +104,19 @@ class InfinitePagination {
         }
         this.#target.append(commentElement)
     }
+    this.#page++
     this.#loading = false
-}
-}
 
+    } catch (e) {
+        this.#target.append(alertElemnt('Impossible de charger les contenus')
+        )
+
+        this.#observer.disconnect()
+        this.#loader.remove()
+    }
+        
+    }
+}
 document
 .querySelectorAll('.js-infinite-pagination')
 .forEach(el => InfinitePagination.add(el)) //
