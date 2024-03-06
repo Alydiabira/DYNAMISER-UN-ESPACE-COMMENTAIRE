@@ -170,7 +170,8 @@ class FetchForm {
                 commentElement.querySelector(selector).innerText = comment[key]
                 console.log({key, selector})
         }
-        this.#target.append(commentElement)
+        this.#target.prepend(commentElement)
+        form.rest()
         } catch (e) {
         }
     }
