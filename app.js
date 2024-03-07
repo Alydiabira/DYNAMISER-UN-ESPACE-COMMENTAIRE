@@ -175,7 +175,7 @@ class FetchForm {
         button.removeAttribute('disabled')
         form.insertAdjacentElement(
             'beforebegin',
-            alertElement('Error serveur', 'success')
+            alertElement('Merci pour votre commentaire', 'success')
         )
         } catch (e) {
             errorElement.addEventListener('close', () => {
