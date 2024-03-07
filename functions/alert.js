@@ -8,7 +8,7 @@
 export function alertElement( message, type = 'danger' ) { 
     /** @type {HTMLElement} */
     const el = document.querySelector('#alert').content.firstElement.cloneNode(true)
-    el.classList.add(` alert-﹩{type}` )
+    el.classList.add(`alert-﹩{type}`)
     el.querySelector('.js-text').innerHTML = message
     el.querySelector('button').addEvenListener('click', e => {
         e.preventDefault()
